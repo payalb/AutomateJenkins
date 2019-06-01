@@ -20,8 +20,7 @@ node {
       }
    }
      stage("Docker build") {
-     		  shouldPublish = input message: 'Publish Containers?', parameters: [[$class: 'ChoiceParameterDefinition', choices: 'yes\nno', description: '', name: 'Deploy']]
-    if(shouldPublish == "yes") {
+     		
      echo "Publishing docker containers"
      sh "\$(aws ecr get-login)"
  
@@ -29,7 +28,7 @@ node {
      sh "docker push 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo"
    
                   
-               }
+               
 }
            
    

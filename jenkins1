@@ -20,8 +20,7 @@ node {
       }
    }
      stage("Docker build") {
-     				sh "chmod 777 /var/run/docker.sock"
-					sh "usermod -a -G docker $USER"
+     				sh "$(aws ecr get-login --no-include-email --region us-east-1)"
                     sh "docker build -t 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo ."
                }
 

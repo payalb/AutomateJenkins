@@ -20,45 +20,32 @@ node {
       }
    }
      stage("Docker build") {
-<<<<<<< HEAD
-               steps {
+
                     sh "docker build -t 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo src/main/resources/"
                }
-=======
-               
-                    sh "docker build -t 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo ."
-              
->>>>>>> 8bff6608c4d086ef2e96c4cc8b84e2a5a7c00a63
-          }
+
+           
    
    stage('Docker') {
        if (isUnix()) {
        	docker.withRegistry('https://167218169229.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Jenkins') {
    		 docker.image('springtestdemo').push('latest')
        }
-<<<<<<< HEAD
+
        }
-=======
+
    }
->>>>>>> 8bff6608c4d086ef2e96c4cc8b84e2a5a7c00a63
-   }
+
+   
    stage('Results') {
       junit '**/target/surefire-reports/TEST-*.xml'
       archiveArtifacts 'target/*.jar'
    }
    stage('deploy'){
-<<<<<<< HEAD
-   steps{
+
     input('should deploy?')
     echo('deploying to prod')
+  }
    }
-   }
-}
-=======
+
    
-    input('should deploy?')
-    echo('deploying to prod')
-   
-   }
-}
->>>>>>> 8bff6608c4d086ef2e96c4cc8b84e2a5a7c00a63

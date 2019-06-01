@@ -21,7 +21,7 @@ node {
    }
      stage("Docker build") {
 
-                    sh "docker build -t 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo src/main/resources/"
+                    sh "docker build -t 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo ."
                }
 
            

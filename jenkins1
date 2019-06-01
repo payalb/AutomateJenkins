@@ -20,9 +20,9 @@ node {
       }
    }
      stage("Docker build") {
-               steps {
+               
                     sh "docker build -t 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo ."
-               }
+              
           }
    
    stage('Docker') {
@@ -37,9 +37,9 @@ node {
       archiveArtifacts 'target/*.jar'
    }
    stage('deploy'){
-   steps{
+   
     input('should deploy?')
     echo('deploying to prod')
-   }
+   
    }
 }

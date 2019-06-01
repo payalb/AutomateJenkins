@@ -20,14 +20,14 @@ node {
       }
    }
      stage("Docker build") {
-     		
+     withDockerRegistry(credentialsId: 'af21719e-ef41-4a04-87b1-af757785799b', url: 'https://167218169229.dkr.ecr.us-east-1.amazonaws.com') {		
      echo "Publishing docker containers"
-     sh "eval \$(aws ecr get-login --no-include-email | sed 's|https://||')"
+    
  	 sh "docker build -t springtestdemo ."
      sh "docker tag springtestdemo:latest 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo:latest"
      sh "docker push 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo:latest"
    
-                  
+    }          
                
 }
            

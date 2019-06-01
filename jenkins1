@@ -20,16 +20,11 @@ node {
       }
    }
      stage("Docker build") {
-     			  steps
-            {
-                script
-                {
+     		
                  	docker.withRegistry('https://167218169229.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:af21719e-ef41-4a04-87b1-af757785799b')
                     def customImage = docker.build("springtestdemo")
                     customImage.push()
-                    }
-                    
-                    }
+                  
                }
 
            

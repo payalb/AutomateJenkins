@@ -1,5 +1,6 @@
 node {
    def mvnHome
+
    stage('Preparation') { // for display purposes
       // Get some code from a GitHub repository
       git 'https://github.com/payalbnsl/SpringUnitTestDemo.git'
@@ -18,8 +19,26 @@ node {
          }
       }
    }
+     stage("Docker build") {
+               steps {
+                    sh "docker build -t 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo ."
+               }
+          }
+   
+   stage('Docker') {
+       if (isUnix()) {
+       	docker.withRegistry('https://167218169229.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Jenkins') {
+   		 docker.image('springtestdemo').push('latest')
+       }
+   }
    stage('Results') {
       junit '**/target/surefire-reports/TEST-*.xml'
       archiveArtifacts 'target/*.jar'
+   }
+   stage('deploy'){
+   steps{
+    input('should deploy?')
+    echo('deploying to prod')
+   }
    }
 }

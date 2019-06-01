@@ -22,7 +22,7 @@ node {
      stage("Docker build") {
      		
      echo "Publishing docker containers"
-     sh "eval \$(aws ecr get-login)"
+     sh "eval \$(aws ecr get-login --no-include-email | sed 's|https://||')"
  	 sh "docker build -t springtestdemo ."
      sh "docker tag springtestdemo:latest 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo:latest"
      sh "docker push 167218169229.dkr.ecr.us-east-1.amazonaws.com/springtestdemo:latest"

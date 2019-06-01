@@ -20,22 +20,20 @@ node {
       }
    }
      stage("Docker build") {
-     			
-                    sh "docker build -t springtestdemo ."
+     			  steps
+            {
+                script
+                {
+                 	docker.withRegistry('https://167218169229.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:af21719e-ef41-4a04-87b1-af757785799b')
+                    def customImage = docker.build("springtestdemo")
+                    customImage.push()
+                    }
+                    
+                    }
                }
 
            
    
-   stage('Docker') {
-       if (isUnix()) {
-       	docker.withRegistry('https://167218169229.dkr.ecr.us-east-1.amazonaws.com', 'ecr:us-east-1:Jenkins') {
-   		 docker.image('springtestdemo').push('latest')
-       }
-
-       }
-
-   }
-
    
    stage('Results') {
       junit '**/target/surefire-reports/TEST-*.xml'
